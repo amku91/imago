@@ -40,6 +40,7 @@ export class GalleryComponent implements OnInit {
       this.imageService.showSnackBar("Unable to load pre images.", "Ok");
     });
   }
+  
   setPageSizeOptions(setPageSizeOptionsInput: string) {
     this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
   }
@@ -64,6 +65,10 @@ export class GalleryComponent implements OnInit {
       result.push(temparray);
     }
     return result;
+  }
+
+  openDialog(){
+    
   }
 
 }
