@@ -12,6 +12,8 @@ export class PreviewComponent implements OnInit {
   imageID:string;
   imageType:string;
   imageUrl:string;
+  disableBackArrow:boolean = false;
+  disableForwardArrow:boolean = false;
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit() {
