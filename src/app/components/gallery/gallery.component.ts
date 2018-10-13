@@ -15,9 +15,22 @@ import 'rxjs/add/observable/interval';
 })
 export class GalleryComponent implements OnInit {
 
+  preImageData:any = [];
+  newUploadedImageData:any = [];
   constructor(public imageService: ImageService) { }
 
   ngOnInit() {
+    /** Load pre images from cloud */
+    this.showPreImages();
+  }
+
+  showPreImages(){
+    this.imageService.getPreImages().subscribe(data => {
+      let rowData:any = data;
+      this.preImageData = rowData.resources;
+    }, error => {
+      this.imageService.showSnackBar("Unable to load pre images", "Ok");
+    });
   }
 
 }

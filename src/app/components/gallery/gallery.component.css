@@ -1,0 +1,7 @@
+.gallery-card {
+    width: 100%;
+    margin: 5px;
+  }
+  .mat-card-image{
+      height: 150px;
+  }

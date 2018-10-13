@@ -9,9 +9,20 @@
     <div class="col-md-3"></div>
   </div>
   <div class="row" style="height: calc(100vmin - 75px);overflow:auto;">
-    <div class="col-md-3"></div>
-    <div class="col-md-6">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+      <div class="row">
+        <div class="col-md-3" *ngFor="let image of preImageData">
+          <mat-card class="gallery-card">
+            <img mat-card-image src="{{image.secure_url}}" alt="Image">
+            <mat-card-actions>
+              <button mat-button>LIKE</button>
+              <button mat-button>SHARE</button>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+      </div>
     </div>
-    <div class="col-md-3"></div>
+    <div class="col-md-1"></div>
   </div>
 </div>
