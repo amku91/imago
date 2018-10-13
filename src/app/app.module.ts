@@ -92,6 +92,7 @@ import { UploadComponent } from './components/upload/upload.component';
   ],
   entryComponents: [
     PreviewComponent,
+    UploadComponent
   ],
   bootstrap: [AppComponent]
 })

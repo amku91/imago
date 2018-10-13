@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject  } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
@@ -8,12 +8,13 @@ import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 })
 export class PreviewComponent implements OnInit {
 
-  imageData:any;
-  imageID:string;
-  imageType:string;
-  imageUrl:string;
-  disableBackArrow:boolean = false;
-  disableForwardArrow:boolean = false;
+  imageData: any;
+  imageID: string;
+  imageType: string;
+  imageUrl: string;
+  imageIndex: number = 0;
+  disableBackArrow: boolean = false;
+  disableForwardArrow: boolean = false;
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit() {
@@ -24,16 +25,43 @@ export class PreviewComponent implements OnInit {
     this.imageType == "cloud" ? this.handlePreImage() : this.handleLocalImage();
   }
 
-  handlePreImage(){
-    this.imageData.forEach(element => {
-      if(element.public_id == this.imageID)
-      this.imageUrl = element.secure_url;
+  handlePreImage() {
+    this.imageData.forEach((element, index) => {
+      if (element.public_id == this.imageID) {
+        this.imageUrl = element.secure_url;
+        this.imageIndex = index;
+      }
     });
-    console.log(this.imageUrl);
+    if (this.imageIndex == 0)
+      this.disableBackArrow = true;
+      if (this.imageIndex == (this.imageData.length -1 ))
+      this.disableForwardArrow = true;
   }
 
-  handleLocalImage(){
+  handleLocalImage() {
 
+  }
+
+  loadNextImage() {
+    let imageIndex = this.imageIndex + 1;
+    this.disableBackArrow = false;
+    this.imageIndex = imageIndex;
+    this.imageUrl = this.imageData[this.imageIndex].secure_url;
+    if (imageIndex == (this.imageData.length - 1)) {
+      this.disableForwardArrow = true;
+      return;
+    }
+  }
+
+  loadPreviousImage() {
+    let imageIndex = this.imageIndex - 1;
+    this.disableForwardArrow = false;
+    if (imageIndex == 0) {
+      this.disableBackArrow = true;
+      return;
+    }
+    this.imageIndex = imageIndex;
+    this.imageUrl = this.imageData[this.imageIndex].secure_url;
   }
 
 }

@@ -5,6 +5,7 @@ import { Observable, empty, of } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { ImageService } from '../../services/image/image.service';
 import { PreviewComponent } from '../preview/preview.component';
+import { UploadComponent } from '../upload/upload.component';
 import { PageEvent } from '@angular/material';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import 'rxjs/add/observable/interval';
@@ -24,11 +25,13 @@ export class GalleryComponent implements OnInit {
   pageSizeOptions: number[] = [10, 15, 25, 50];
   pageEvent: PageEvent;
   activePageData: any = [];
+  storageKeyName = environment.localStorageKey;
   constructor(public imageService: ImageService, public dialog: MatDialog) { }
 
   ngOnInit() {
     /** Load pre images from cloud */
     this.showPreImages();
+    localStorage.getItem("imagoimgData");
   }
 
   showPreImages() {
@@ -42,7 +45,7 @@ export class GalleryComponent implements OnInit {
       this.imageService.showSnackBar("Unable to load pre images.", "Ok");
     });
   }
-  
+
   setPageSizeOptions(setPageSizeOptionsInput: string) {
     this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
   }
@@ -69,7 +72,7 @@ export class GalleryComponent implements OnInit {
     return result;
   }
 
-  openViewDialog(id:string, type:string){
+  openViewDialog(id: string, type: string) {
     var scope = this;
     this.dialog.open(PreviewComponent, {
       width: 'auto',
@@ -78,10 +81,29 @@ export class GalleryComponent implements OnInit {
       data: {
         id: id,
         type: type,
-        imageData: this.allImageData, 
+        imageData: this.allImageData,
       }
     });
   }
-  openAddDialog(){}
+  openAddDialog() {
+    var scope = this;
+    let dialogRef = this.dialog.open(UploadComponent, {
+      width: 'auto',
+      height: 'auto',
+      panelClass: 'imageview',
+      data: {
+        type: "local",
+        imageData: this.allImageData,
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      var localData: any = localStorage.getItem(this.storageKeyName);
+      try {
+        localData = JSON.parse(localData);
+      } catch (e) {
+        localData = [];
+      }
+    });
+  }
 
 }
