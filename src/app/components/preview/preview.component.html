@@ -1,3 +1,12 @@
-<p>
-  preview works!
-</p>
+<div class="row">
+  <div class="col-md-12">
+    <div class="arrowsl">
+      <i class="material-icons" *ngIf="!disableBackArrow">arrow_back_ios</i>
+    </div>
+    <img mat-card-image src="{{imageUrl}}" alt="Image">
+    <div class="arrowsr">
+      <i class="material-icons" *ngIf="!disableForwardArrow">arrow_forward_ios</i>
+    </div>
+  </div>
+  
+</div>

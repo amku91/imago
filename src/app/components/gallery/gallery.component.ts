@@ -4,7 +4,9 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { Observable, empty, of } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { ImageService } from '../../services/image/image.service';
+import { PreviewComponent } from '../preview/preview.component';
 import { PageEvent } from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import 'rxjs/add/observable/interval';
 
 @Component({
@@ -22,7 +24,7 @@ export class GalleryComponent implements OnInit {
   pageSizeOptions: number[] = [10, 15, 25, 50];
   pageEvent: PageEvent;
   activePageData: any = [];
-  constructor(public imageService: ImageService) { }
+  constructor(public imageService: ImageService, public dialog: MatDialog) { }
 
   ngOnInit() {
     /** Load pre images from cloud */
@@ -67,8 +69,19 @@ export class GalleryComponent implements OnInit {
     return result;
   }
 
-  openDialog(){
-    
+  openViewDialog(id:string, type:string){
+    var scope = this;
+    this.dialog.open(PreviewComponent, {
+      width: 'auto',
+      height: 'auto',
+      panelClass: 'imageview',
+      data: {
+        id: id,
+        type: type,
+        imageData: this.allImageData, 
+      }
+    });
   }
+  openAddDialog(){}
 
 }

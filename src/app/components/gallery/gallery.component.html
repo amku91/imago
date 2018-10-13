@@ -15,7 +15,7 @@
         <span class="pull-left">
           <h4>Image Gallery</h4>
         </span>
-        <button mat-mini-fab class="pull-right mat-fab-custom" matTooltip="Add new image to gallery" (click)="openDialog()"><i class="material-icons">add</i></button>
+        <button mat-mini-fab class="pull-right mat-fab-custom" matTooltip="Add new image to gallery" (click)="openAddDialog()"><i class="material-icons">add</i></button>
       </div>
       <div class="col-md-1"></div>
     </div>
@@ -24,7 +24,7 @@
         <div class="row" *ngFor="let imageArr of activePageData">
           <div class="col-md-1"></div>
           <div class="col-md-2" *ngFor="let image of imageArr">
-            <mat-card class="gallery-card">
+            <mat-card class="gallery-card" (click)="openViewDialog(image.public_id, image.type)">
               <img mat-card-image src="{{image.secure_url}}" alt="Image">
               <mat-card-actions>
                 <button class="text-right" mat-button>20 Oct, 2018</button>

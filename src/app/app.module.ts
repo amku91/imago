@@ -90,6 +90,9 @@ import { UploadComponent } from './components/upload/upload.component';
   ],
   providers: [
   ],
+  entryComponents: [
+    PreviewComponent,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
