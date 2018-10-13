@@ -6,3 +6,10 @@
   .mat-card-image{
       height: 150px;
   }
+  .margin10{
+    margin: 10px 0px;
+  }
+  .mat-fab-custom{
+    background-color:#FD7042;
+    color:white;
+  }

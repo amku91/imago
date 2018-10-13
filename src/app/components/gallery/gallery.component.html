@@ -8,25 +8,38 @@
     </div>
     <div class="col-md-3"></div>
   </div>
-  <div class="row" style="height: calc(100vmin - 75px);overflow:auto;">
-    <div class="col-md-12">
-      <div class="row" *ngFor="let imageArr of activePageData">
-        <div class="col-md-1"></div>
-        <div class="col-md-2" *ngFor="let image of imageArr">
-          <mat-card class="gallery-card">
-            <img mat-card-image src="{{image.secure_url}}" alt="Image">
-            <mat-card-actions>
-              <button class="text-right" mat-button>20 Oct, 2018</button>
-            </mat-card-actions>
-          </mat-card>
+  <div style="height: calc(100vmin - 75px);overflow:auto;">
+    <div class="row margin10">
+      <div class="col-md-1"></div>
+      <div class="col-md-10">
+        <span class="pull-left">
+          <h4>Image Gallery</h4>
+        </span>
+        <button mat-mini-fab class="pull-right mat-fab-custom" matTooltip="Add new image to gallery" (click)="openDialog()"><i class="material-icons">add</i></button>
+      </div>
+      <div class="col-md-1"></div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row" *ngFor="let imageArr of activePageData">
+          <div class="col-md-1"></div>
+          <div class="col-md-2" *ngFor="let image of imageArr">
+            <mat-card class="gallery-card">
+              <img mat-card-image src="{{image.secure_url}}" alt="Image">
+              <mat-card-actions>
+                <button class="text-right" mat-button>20 Oct, 2018</button>
+              </mat-card-actions>
+            </mat-card>
+          </div>
+          <div class="col-md-1"></div>
         </div>
-        <div class="col-md-1"></div>
       </div>
     </div>
-    <div class="col-md-10 col-md-offset-1">
-      <br />
-      <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="onPageChanged($event)">
-      </mat-paginator>
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="onPageChanged($event)">
+        </mat-paginator>
+      </div>
     </div>
   </div>
 </div>
