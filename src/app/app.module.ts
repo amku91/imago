@@ -86,12 +86,13 @@ import { UploadComponent } from './components/upload/upload.component';
     MatTooltipModule,
   ],
   exports: [
-    NavbarComponent
+    NavbarComponent,
   ],
   providers: [
   ],
   entryComponents: [
     PreviewComponent,
+    UploadComponent
   ],
   bootstrap: [AppComponent]
 })

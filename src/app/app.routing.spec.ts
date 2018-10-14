@@ -1,15 +1,12 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { BrowserModule } from '@angular/platform-browser';
-import { AppComponent } from '../../app.component';
-import { NavbarComponent } from '../../navbar/navbar.component';
-import { GalleryComponent } from '../../components/gallery/gallery.component';
-import { UploadComponent } from '../../components/upload/upload.component';
-import { PreviewComponent } from '../../components/preview/preview.component';
+import { TestBed, async, fakeAsync, tick } from '@angular/core/testing';
+import { AppComponent } from './app.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { GalleryComponent } from './components/gallery/gallery.component';
+import { UploadComponent } from './components/upload/upload.component';
+import { PreviewComponent } from './components/preview/preview.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { AppRoutingModule } from '../../app.routing';
+import { AppRoutingModule } from './app.routing';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTableModule } from '@angular/material/table';
@@ -33,13 +30,18 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import {routes} from './app.routing';
+import {Router} from "@angular/router";
+import {Location} from "@angular/common";
 import { HttpModule } from '@angular/http';
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 
-describe('UploadComponent', () => {
-  let component: UploadComponent;
-  let fixture: ComponentFixture<UploadComponent>;
-
+TestBed.configureTestingModule({
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+});
+describe('Router: App', () => {
+  let location: Location;
+  let router: Router;
+  let fixture;
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
@@ -50,8 +52,6 @@ describe('UploadComponent', () => {
         NavbarComponent
       ],
       imports: [
-        BrowserAnimationsModule,
-        BrowserModule,
         RouterModule,
         AppRoutingModule,
         MatDialogModule,
@@ -80,45 +80,21 @@ describe('UploadComponent', () => {
         MatTooltipModule,
         HttpModule
       ],
-      providers: [
-        { provide: MAT_DIALOG_DATA, useValue: {id: "imago/158466-800x600", type: "cloud", imageData:[{
-          "public_id": "imago/158466-800x600",
-          "format": "jpg",
-          "version": 1539411112,
-          "resource_type": "image",
-          "type": "cloud",
-          "created_at": "2018-10-13T06:11:52Z",
-          "bytes": 347965,
-          "width": 800,
-          "height": 600,
-          "url": "http://res.cloudinary.com/remphi-internet-pvt-ltd/image/upload/v1539411112/imago/158466-800x600.jpg",
-          "secure_url": "https://res.cloudinary.com/remphi-internet-pvt-ltd/image/upload/v1539411112/imago/158466-800x600.jpg"
-      }]}},
-      { provide: MatDialogModule, useValue: {id: "imago/158466-800x600", type: "cloud", imageData:[{
-        "public_id": "imago/158466-800x600",
-        "format": "jpg",
-        "version": 1539411112,
-        "resource_type": "image",
-        "type": "cloud",
-        "created_at": "2018-10-13T06:11:52Z",
-        "bytes": 347965,
-        "width": 800,
-        "height": 600,
-        "url": "http://res.cloudinary.com/remphi-internet-pvt-ltd/image/upload/v1539411112/imago/158466-800x600.jpg",
-        "secure_url": "https://res.cloudinary.com/remphi-internet-pvt-ltd/image/upload/v1539411112/imago/158466-800x600.jpg"
-    }]}}
-  ],
- })
-    .compileComponents();
+    }).compileComponents();
+    router = TestBed.get(Router);
+    location = TestBed.get(Location);
+
+    fixture = TestBed.createComponent(AppComponent);
+    router.initialNavigation();
   }));
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(UploadComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+  it('navigate to "" redirects you to /gallery', fakeAsync(() => { 
+    router.navigate(['']); 
+    tick(); 
+    expect(location.path()).toBe('/gallery'); 
+  }));
+  it('navigate to any url redirects you to /gallery', fakeAsync(() => { 
+    router.navigate(['/wrongpath']); 
+    tick(); 
+    expect(location.path()).toBe('/gallery'); 
+  }));
 });

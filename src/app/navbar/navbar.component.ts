@@ -6,6 +6,11 @@ import { GalleryComponent } from '../components/gallery/gallery.component';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
+/**
+ * @name NavbarComponent
+ * @description Created to show common header into pages
+ * @author Amit Kumar
+ */
 export class NavbarComponent implements OnInit {
   @Input() title: any;
 

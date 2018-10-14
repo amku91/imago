@@ -7,7 +7,9 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "preinstall": "npm install -g @angular/cli @angular/compiler-cli typescript",
+    "postinstall": "ng build --prod"
   },
   "private": true,
   "dependencies": {
@@ -26,9 +28,11 @@
     "angularx-social-login": "^1.2.3",
     "cloudinary-core": "^2.5.0",
     "core-js": "^2.5.4",
+    "express": "^4.16.4",
     "ng2-twitter": "^0.3.0",
     "ngx-embed-video": "^0.3.0",
     "ngx-infinite-scroll": "^0.8.4",
+    "path": "^0.12.7",
     "rxjs": "^6.0.0",
     "rxjs-compat": "^6.0.0",
     "twitter": "^1.7.1",

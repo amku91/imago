@@ -1,14 +1,8 @@
-<div class="container-fluid">
+<div class="container-fluid ">
   <div class="row">
     <app-navbar></app-navbar>
   </div>
-  <div class="row">
-    <div class="col-md-3"></div>
-    <div class="col-md-6">
-    </div>
-    <div class="col-md-3"></div>
-  </div>
-  <div style="height: calc(100vmin - 75px);overflow:auto;">
+  <div class="container-fluid rightContainer">
     <div class="row margin10">
       <div class="col-md-1"></div>
       <div class="col-md-10">
@@ -25,9 +19,10 @@
           <div class="col-md-1"></div>
           <div class="col-md-2" *ngFor="let image of imageArr">
             <mat-card class="gallery-card" (click)="openViewDialog(image.public_id, image.type)">
-              <img mat-card-image src="{{image.secure_url}}" alt="Image">
+              <img mat-card-image src="{{image.type == 'local' ? image.data : image.secure_url}}" alt="Image">
               <mat-card-actions>
-                <button class="text-right" mat-button>20 Oct, 2018</button>
+                <button matTooltip="Image Size" class="smalltext" mat-button>{{(image.bytes/1024) | number : '1.2-2'}} KB</button>
+                <button matTooltip="Created Date" class="smalltext" mat-button>{{image.created_at | date:'dd MMM, yyyy'}}</button>
               </mat-card-actions>
             </mat-card>
           </div>

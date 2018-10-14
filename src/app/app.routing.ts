@@ -6,9 +6,10 @@ import { GalleryComponent } from './components/gallery/gallery.component';
 
 
 
-const routes: Routes =[
-    { path: '', component: GalleryComponent },
-    // { path: '/images', component: GalleryComponent },
+export const routes: Routes =[
+    { path: 'gallery', component: GalleryComponent },
+    { path: '',redirectTo: 'gallery', pathMatch: 'full'},
+    { path: "**",redirectTo:"gallery"}
 ];
 
 @NgModule({
