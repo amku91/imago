@@ -12,14 +12,14 @@
           <br />
           <input #inputFile type="file" id="uploadImage" (change)="previewFile($event)" accept="image/*" />
           <br />
-          <div class="help-block">Only JPG,JPEG,PNG,ICO files allowed.</div>
+          <div class="help-block">Only JPG,JPEG,PNG files allowed.</div>
           <div class="help-block">Max File Size: 1MB</div>
         </div>
       </div>
     </div>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-button mat-dialog-close (click)="saveImage()">Upload</button>
+    <button mat-button mat-dialog-close (click)="saveImage()" [disabled]="imageData != null ? false : true">Upload</button>
     <button mat-button mat-dialog-close>Cancel</button>
   </mat-card-actions>
 </mat-card>

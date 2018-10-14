@@ -6,6 +6,7 @@ export const environment = {
   production: false,
   resultPerPage: 5,
   localStorageKey: "imagoData",
+  localDeleteKey: "iamgoDelete",
 };
 
 /*

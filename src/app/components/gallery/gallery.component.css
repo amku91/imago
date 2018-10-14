@@ -5,6 +5,7 @@
   }
   .mat-card-image{
       height: 150px;
+      margin-bottom: -12px !important;
   }
   .margin10{
     margin: 10px 0px;
@@ -13,3 +14,33 @@
     background-color:#FD7042;
     color:white;
   }
+  .smalltext{
+      font-size: 10px;
+      font-weight: normal;
+  }
+  .mat-card-actions .mat-button, .mat-card-actions .mat-raised-button{
+    margin: 2px 0px -10px 0px !important;
+  }
+.rightContainer
+{
+    min-height: calc(100vh - 75px);
+    max-height: calc(100vh);
+    overflow-y: scroll;
+}
+@media (max-width: 599px){
+.rightContainer
+{
+        min-height: calc(100vh - 75px);
+        max-height: calc(100vh);
+        overflow-y: scroll;
+}
+}
+
+@media (min-width: 992px){
+    .rightContainer
+    {
+            min-height: calc(100vmin - 75px);
+            max-height: calc(100vmin);
+            overflow-y: scroll;
+    }
+}
